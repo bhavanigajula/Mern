@@ -1,0 +1,29 @@
+body{
+    background-color:grey;
+    align-items: center;
+    justify-content: center;
+    height: 200vh;
+    display:flex;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+    border:3px solid black;
+}
+.left{
+    background-color:cornflowerblue;
+    color:black;
+    border-right: 1px solid black;
+    padding:8px 20px;
+}
+.right{
+    background-color: bisque;
+    color:black;
+    padding:66px 40px;
+}
+.resume{
+    justify-content: center;
+    text-align: center;
+}
