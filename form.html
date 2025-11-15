@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="form.css"/>
+</head>
+<body>
+    <div class="container">
+    <h2>Student Bus Registration Form</h2> 
+    <form id="register">
+        <label for="rnum" id="rnum" name="rname">Registration number:</label>
+        <input type="text" id="rnum" name="rnum" placeholder="Enter registration number">
+        <label class="pic" for="Photo" id="photo" name="photo">Photo:</label><br>
+        <img class="image" alt="Student photo"><br>
+        <label for="name" id="fname" >First Name:</label>
+        <input type="text" id="fname" name="name" placeholder="Enter the name"><br>
+        <label for="name" id="lname" >Last Name:</label>
+        <input type="text" id="lname" name="name" placeholder="Enter the name"><br>
+        <label for="number" id="pnum" >Phone Number:</label>
+        <input type="number" id="pnum" name="number" placeholder="Enter the number"><br>
+        <label for="gender">Gender:</label><br>
+        <label for="male" id="male" name="gender">Male</label>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="female" id="female" name="gender">Female</label>
+        <input type="radio" id="female" name="gender"  required><br>
+        <label for="date" id="date" name="date">Date Of Birth:</label>
+        <input type="date" id="date" name="date"><br>
+        <label for="education" id="education" name="education">Education:</label><br>
+        <label for="btech" id="btech" name="education" >Btech</label>
+        <input type="checkbox" id="btech" name="btech">
+        <label for="mtech" id="mtech" name="education" >Mtech</label>
+        <input type="checkbox" id="mtech" name="mtech">
+        <label for="mba" id="mba" name="education" >MBA</label>
+        <input type="checkbox" id="mba" name="mba"><br>
+        <label for="year" id="year" name="year">Year:</label><br>
+        <label for="year" id="fyear" name="year">I</label>
+        <input type="checkbox" id="fyear" name="year">
+        <label for="year" id="syear" name="year">II</label>
+        <input type="checkbox" id="syear" name="year">
+        <label for="year" id="tyear" name="year">III</label>
+        <input type="checkbox" id="tyear" name="year">
+        <label for="year" id="fyear" name="year">IV</label>
+        <input type="checkbox" id="foyear" name="year"><br>
+        <label for="name" id="name" name="pname">parent Name:</label>
+        <input type="text" id="pname" name="pname" placeholder="Enter Parent name"><br>
+        <label for="number" id="pnum" name="pnum" >Parent Number:</label>
+        <input type="number" id="pnum" name="pnum" placeholder="Enter Number"><br>
+        <label for="address" id="address" name="address" ><b>Address:</b></label><br>
+        <label for="Door" id="dnum" name="address" >Door-No:</label>
+        <input type="text" id="dnum" name="address" >
+        <label for="village" id="vname" name="address" >Village:</label>
+        <input type="text" id="vname" name="address"><br>
+        <label for="mandal" id="mname" name="address" >Mandal:</label>
+        <input type="text" id="mname" name="address">
+        <label for="street" id="sname" name="address" >Street/Area:</label>
+        <input type="text" id="sname" name="address"><br>
+        <label for="district" id="dname" name="address" >District:</label>
+        <input type="text" id="dname" name="address">
+        <label for="pin" id="pin" name="address" >Pin-code:</label>
+        <input type="number" id="pin" name="address"><br>
+        <label for="businfo" id="binfo" name="details" ><b>Bus Details:</b></label><br>
+        <label for="busnumber" id="bnum" name="details">Bus Number:</label>
+        <input type="number" id="bnum" name="details"><br>
+        <label for="route" id="rname" name="details">Route:</label>
+        <input type="text" id="rname" name="details">
+        <label for="hault" id="hname" name="details">Hault:</label>
+        <input type="text" id="hname" name="details"><br>
+        <label for="fees" id="fnum" name="fees">Total Fees:</label>
+        <input type="number" id="fnum" name="fees"><br>
+        <label for="words" id="fword" name="fees">Total Fees in Words:</label>
+        <input type="text" id="fword" name="fees"><br>
+        <label for="signature" id="ssign" name="signature">Student Signature:</label><br>
+        <label for="signature" id="psign" name="signature">Parent Signature:</label><br>
+        <label for="signature" id="isign" name="signature"> Bus Incharge Signature:</label><br>
+        <label for="submit" id="submit" aria-placeholder="Submit" ></label>
+        <input type="button" id="submit" value="submit" >
+    </form>
+    </div>
+     <script>
+document.getElementById("register").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form from submitting immediately
+    
+    // Get form values
+    let rnum = document.getElementById("rnum").value.trim();
+    let fname = document.getElementById("fname").value.trim();
+    let lname = document.getElementById("lname").value.trim();
+    let phone = document.getElementById("pnum").value.trim();
+    let gender = document.querySelector('input[name="gender"]:checked');
+    let date = document.getElementById("date").value.trim();
+    let busnum = document.getElementById("busnum").value.trim();
+    let fees = document.getElementById("fees").value.trim();
+    
+    // Validations
+    if (regnum === "") {
+        alert("Please enter your Registration Number.");
+        return;
+    }
+    if (fname === "") {
+        alert("Please enter your First Name.");
+        return;
+    }
+    if (lname === "") {
+        alert("Please enter your Last Name.");
+        return;
+    }
+    if (phone === "" || phone.length < 10) {
+        alert("Please enter a valid Phone Number.");
+        return;
+    }
+    if (!gender) {
+        alert("Please select your Gender.");
+        return;
+    }
+    if (dob === "") {
+        alert("Please select your Date of Birth.");
+        return;
+    }
+    if (busnum === "") {
+        alert("Please enter Bus Number.");
+        return;
+    }
+    if (fees === "") {
+        alert("Please enter Total Fees.");
+        return;
+    }
+
+    // If all checks pass
+    alert("Form submitted successfully!");
+    this.submit(); // Now submit the form
+});
+</script>
+</body>
+</html>

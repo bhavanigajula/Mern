@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager / To-Do List</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f8f9fa;
+    }
+    .card {
+      border-radius: 15px;
+    }
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h2 class="text-center mb-4">✅ Task Manager / To-Do List</h2>
+
+    <!-- Add Task Form -->
+    <div class="card p-4 shadow mb-4">
+      <form id="taskForm" class="row g-3">
+        <div class="col-md-9">
+          <input type="text" id="taskInput" class="form-control" placeholder="Enter new task..." required>
+        </div>
+        <div class="col-md-3 d-grid">
+          <button type="submit" class="btn btn-primary">Add Task</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Filter Options -->
+    <div class="mb-3">
+      <select id="filter" class="form-select w-25">
+        <option value="all">All Tasks</option>
+        <option value="completed">Completed</option>
+        <option value="pending">Pending</option>
+      </select>
+    </div>
+
+    <!-- Task List -->
+    <div class="card p-4 shadow">
+      <h5>Task List</h5>
+      <ul id="taskList" class="list-group mt-3"></ul>
+    </div>
+  </div>
+
+  <script>
+    const taskForm = document.getElementById('taskForm');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+    const filter = document.getElementById('filter');
+
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+    // Add Task
+    taskForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const taskText = taskInput.value.trim();
+      if (taskText === '') return;
+
+      const task = {
+        id: Date.now(),
+        text: taskText,
+        completed: false
+      };
+
+      tasks.push(task);
+      saveTasks();
+      renderTasks();
+      taskForm.reset();
+    });
+
+    // Render Tasks
+    function renderTasks() {
+      taskList.innerHTML = '';
+      let filterValue = filter.value;
+
+      tasks.forEach(task => {
+        if (filterValue === 'completed' && !task.completed) return;
+        if (filterValue === 'pending' && task.completed) return;
+
+        const li = document.createElement('li');
+        li.className = 'list-group-item d-flex justify-content-between align-items-center';
+        
+        const span = document.createElement('span');
+        span.textContent = task.text;
+        if (task.completed) span.classList.add('completed');
+        li.appendChild(span);
+
+        const btnGroup = document.createElement('div');
+
+        // Complete button
+        const completeBtn = document.createElement('button');
+        completeBtn.textContent = '✔';
+        completeBtn.className = 'btn btn-success btn-sm me-2';
+        completeBtn.onclick = () => toggleComplete(task.id);
+
+        // Edit button
+        const editBtn = document.createElement('button');
+        editBtn.textContent = '✏';
+        editBtn.className = 'btn btn-warning btn-sm me-2';
+        editBtn.onclick = () => editTask(task.id);
+
+        // Delete button
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = '🗑';
+        deleteBtn.className = 'btn btn-danger btn-sm';
+        deleteBtn.onclick = () => deleteTask(task.id);
+
+        btnGroup.appendChild(completeBtn);
+        btnGroup.appendChild(editBtn);
+        btnGroup.appendChild(deleteBtn);
+
+        li.appendChild(btnGroup);
+        taskList.appendChild(li);
+      });
+    }
+
+    // Toggle Complete
+    function toggleComplete(id) {
+      tasks = tasks.map(task => 
+        task.id === id ? { ...task, completed: !task.completed } : task
+      );
+      saveTasks();
+      renderTasks();
+    }
+
+    // Edit Task
+    function editTask(id) {
+      const newText = prompt("Edit your task:");
+      if (newText) {
+        tasks = tasks.map(task =>
+          task.id === id ? { ...task, text: newText } : task
+        );
+        saveTasks();
+        renderTasks();
+      }
+    }
+
+    // Delete Task
+    function deleteTask(id) {
+      tasks = tasks.filter(task => task.id !== id);
+      saveTasks();
+      renderTasks();
+    }
+
+    // Save to LocalStorage
+    function saveTasks() {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    // Filter Tasks
+    filter.addEventListener('change', renderTasks);
+
+    // Initial Render
+    renderTasks();
+  </script>
+</body>
+</html>

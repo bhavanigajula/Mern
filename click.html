@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+</head>
+<body>
+    <!-- <button onclick="changeBackground()">clickme</button>
+    <script>
+        function changeBackground(){
+        document.body.style.backgroundColor="rgb(0,0,0)";
+        }
+    </script> -->
+
+    <!-- <button>click here to change color</button>
+    <script>
+    const btn=document.querySelector("button");
+    btn.addEventListener("click",function() {
+    document.body.style.backgroundColor="rgb(0,0,0)";
+        });
+    </script> -->
+
+    <!-- <button>Click here to change random color </button>
+    <script>
+        const btn=document.querySelector("button");
+        function random(max){
+        return Math.floor(Math.random() * max);
+        }
+        btn.addEventListener("click",function changeBackground() {
+        const r=random(255);
+        const g=random(255);
+        const b=random(255);
+        document.body.style.backgroundColor="rgb("+r+","+g+","+b+")";
+        });
+        btn.addEventListener("click",changeBackground);
+    </script> -->
+
+  <!-- <button>Click here to change random color </button>
+    <script>
+        const btn=document.querySelector("button");
+        function random(max){
+        return Math.floor(Math.random() * max);
+        }
+        function changeBackground() {
+        const r=random(255);
+        const g=random(255);
+        const b=random(255);
+        document.body.style.backgroundColor="rgb("+r+","+g+","+b+")";
+        }
+        btn.addEventListener("click",changeBackground);
+    </script> -->
+
+    <button id="startbtn">Start</button>
+    <button id="stopbtn">Stop</button>
+    <script>
+        const startBtn=document.getElementById("startbtn");
+        const stopBtn=document.getElementById("stopbtn");
+        function random(max){
+        return Math.floor(Math.random() * max);
+        }
+        function changeBackground() {
+        const r=random(255);
+        const g=random(255);
+        const b=random(255);
+        document.body.style.backgroundColor="rgb("+r+","+g+","+b+")";
+        }
+        startBtn.addEventListener("click", () =>{
+            document.addEventListener("mousemove", changeBackground);
+        });
+        stopBtn.addEventListener("click",() =>{
+            document.removeEventListener("mousemove",changeBackground);
+        })
+    </script>
+
+
+</body>
+</html>
